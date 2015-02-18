@@ -1,0 +1,26 @@
+.container {
+	position: absolute;
+	width: 300px;
+	height: 300px;
+	top: 50%;
+	left: 50%;
+	margin: -150px -150px;
+	text-align: center;
+}
+
+
+@media only screen and (max-height: 300px), (max-height: 300px) and (orientation: landscape) {
+	.container {
+		margin-top: 0px;
+	}
+}
+
+input {
+	width: 250px;
+	margin: auto;
+	padding: 10px;
+	margin-bottom: 5px;
+	font-size: x-large;
+	border: 0;
+	border-bottom: 1px solid;
+}
