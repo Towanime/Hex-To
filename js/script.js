@@ -12,12 +12,14 @@ var delay = (function(){
 // module definition
 var hexTo = (function ($) {
  	// input
-    var hexEl, rgbEl, hslEl, hwbEl, cssEl, fields;
+    var body, hexEl, rgbEl, hslEl, hwbEl, cssEl, fields, defaultColor;
 
     // init variables and listeners
     function init() {
     	hexEl = $("#hex"), rgbEl = $("#rgb"), hslEl = $("#hsl"),
     		hwbEl = $("#hwb"), cssEl = $("#css");
+        defaultColor = new Color("#3d4d4d");
+        body = $("body");
     	fields = $("input[type='text']");
     	fields.keyup(function(e) {
     		// ignore some keys
@@ -29,8 +31,8 @@ var hexTo = (function ($) {
 		});
 		fields.blur(function(){
 			var from = $(this);
-			var type = from.attr('id');
-			if(from.val() == ''){
+			var type = from.attr("id");
+			if(from.val() == '' && type != "css"){
 				clearFields();
 				return;
 			}
@@ -65,10 +67,9 @@ var hexTo = (function ($) {
     		if(type != 'css'){
     			cssEl.val(color.keyword());
     		}
+            // update theme
+            update(color);
     	} catch(e){
-    		console.log(e);
-    		//fields.val('');
-    		//from.val(value);
     		clearFields(type);
     	}
     }
@@ -128,6 +129,26 @@ var hexTo = (function ($) {
     		var el = $(element);
     		if(el.attr('id') != ignore) el.val('');
     	});
+        update(defaultColor);
+    }
+
+    function update(color){
+        body.attr("style", "background-color:"+color.hexString()+";");
+        if(isLight(color.red(), color.green(), color.blue())){
+            body.attr("class", "dark");
+        }else{
+            body.attr("class", "light");
+        }
+    }
+
+    function isLight(r, g, b){
+        // taken from http://stackoverflow.com/questions/12043187/how-to-check-if-hex-color-is-too-black
+        var luma = 0.2126 * r + 0.7152 * g + 0.0722 * b; // per ITU-R BT.709
+        if (luma < 100) {
+            return false;
+        }else{
+            return true;
+        }
     }
 
     return {
