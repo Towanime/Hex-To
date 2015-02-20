@@ -40,7 +40,9 @@ var hexTo = (function ($) {
     		if(value !== false){
     			from.val(value);
     		}
-		});	
+		});
+        // random color
+        $("#btn-random").click(getRandomColor);
     }
 
     function convert(from){
@@ -177,6 +179,18 @@ var hexTo = (function ($) {
         }else{
             return true;
         }
+    }
+
+    function getRandomColor() {
+        // taken from http://stackoverflow.com/questions/1484506/random-color-generator-in-javascript
+        // might need something better
+        var letters = '0123456789ABCDEF'.split('');
+        var color = '#';
+        for (var i = 0; i < 6; i++ ) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        hexEl.val(color);
+        convert(hexEl);
     }
 
     return {

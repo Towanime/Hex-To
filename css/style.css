@@ -16,7 +16,6 @@
 	text-align: center;
 }
 
-
 @media only screen and (max-height: 300px), (max-height: 300px) and (orientation: landscape) {
 	.container {
 		margin-top: 0px;
@@ -71,3 +70,21 @@ input {
 .dark :-ms-input-placeholder { /* Internet Explorer 10+ */
    color: black;
 }
+
+.btn {
+	font-weight: bold;
+	background: none;
+	padding: 10px 20px 10px 20px;
+	text-decoration: none;
+}
+
+.light .btn {
+	border: solid white 2px;
+}
+
+.dark .btn {
+	border: solid black 2px;
+}
+
+.light a:link, .light a:visited, .light a:hover, .light a:active { color: white; }
+.dark a:link, .dark a:visited, .dark a:hover, .dark a:active { color: black; }
