@@ -81,43 +81,71 @@ var hexTo = (function ($) {
     		case "hex":
     			var hexRE = /([#]?)([0-9a-f]{3})([0-9a-f]{3})?/i;
 				var match = hexRE.exec(value);
+                // ["#FFF153", "#", "FFF", "153", index: 0, input: "#FFF153"]
 				if(match && match.input.length == match[0].length){
 					var validated = match[0];
 					// check if there's a #
-					if(match[1] === '') validated = "#"+validated;
+					if(match[1] === "") validated = "#"+validated;
 					return validated.toUpperCase();
 				}
-				console.log(match)
     		break;
 
     		case "rgb":
-    			var rgbRE = /(rgb[a]?)?\(?(\d{1,3}),\s?(\d{1,3}),\s?(\d{1,3})(,?\s?([0-1]\.?[0-9]?))?\)?/i;
+    			var rgbRE = /(rgb[a]?\(?)?(\d{1,3}),\s?(\d{1,3}),\s?(\d{1,3})(,?\s?([0-1]\.?[0-9]?))?\)?/i;
 				var match = rgbRE.exec(value);
-				console.log(match)
+                //["rgba(255, 1, 55, 0.7)", "rgba(", "255", "1", "55", ", 0.7", "0.7", index: 0, input: "rgba(255, 1, 55, 0.7)"]
 				if(match && match.input.length == match[0].length
 					&& match[2] && match[3] && match[4]){
-					var begin = match[1]?match[1]:"rgb", r = match[2], g = match[3], b = match[4], a = 1;
+					var start = match[1]?match[1]:"rgb(", end = ")", r = match[2], g = match[3], b = match[4], a = 1;
 					// does it have alpha?
-					if(match[6]){
-						if(parseFloat(match[6]) <= 1){
-							a = match[6];
-							begin = "rbga";
+                     if(match[6] || start=="rgba("){
+                        var aValue = !match[6]?a:parseFloat(match[6]);
+                        if(aValue <= 1){
+                            a = aValue;
+							start = "rgba(";
+                            end = ", " + a + ")";
 						}else{
 							return false;
 						}
 					}
 					// less tan 255
 					if(parseInt(r) <= 255 && parseInt(g) <= 255 && parseInt(b) <= 255){
-						if(begin == "rgb"){
-							return "rgb("+r+", "+g+", "+b+")";
-						}else{
-							return "rgba("+r+", "+g+", "+b+", "+a+")";
-						}
+						return start + r + ", " + g + ", " + b + end;
 					}
 				}
     		break;
 
+            case "hsl":
+            case "hwb":
+                var re = /(hsl[a]?\(?|hwb\(?)?(\d{1,3}),\s?(\d{1,3}%),\s?(\d{1,3}%)(,?\s?([0-1]\.?[0-9]?))?\)?/i;
+                var match = re.exec(value);
+                // ["hsla(0, 0%, 100%, 1)", "hsla(", "0", "0%", "100%", ", 1", "1", index: 0, input: "hsla(0, 0%, 100%, 1)"]
+                    // or
+                //["hwb(0, 100%, 0%, 1)", "hwb(", "0", "100%", "0%", ",1", "1", index: 0, input: "hwb(0, 100%, 0%, 1)"]
+                if(match && match.input.length == match[0].length
+                    && match[2] && match[3] && match[4]){
+                    var start = match[1]?match[1]:type+"(", end = ")", p1 = match[2], p2 = match[3], p3 = match[4], a = 1;
+                    // does it have alpha?
+                    if(match[6] || start=="hsla("){
+                        var aValue = !match[6]?a:parseFloat(match[6]);
+                        if(aValue <= 1){
+                            a = aValue;
+                            // hsla or hwb
+                            start = (type=="hsl"?"hsla(":type+"(");
+                            end = ", " + aValue + ")";
+                        }else{
+                            return false;
+                        }
+                    }
+                    // less tan 255
+                    if(parseInt(p1) <= 360 && parseInt(p2) <= 100 && parseInt(p3) <= 100){
+                        return start + p1 + ", " + p2 + ", " + p3 + end;
+                    }
+                }
+            break;
+
     		default:
+                // for css strings
     			return value;
     		break;
     	}
