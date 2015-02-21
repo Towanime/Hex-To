@@ -1,3 +1,10 @@
+@import url(http://fonts.googleapis.com/css?family=Droid+Sans);
+
+*{
+	font-family: 'Droid Sans', sans-serif;
+	font-weight: 400; 
+}
+
 .light {
 	color: white;
 }
@@ -72,7 +79,6 @@ input {
 }
 
 .btn {
-	font-weight: bold;
 	background: none;
 	padding: 10px 20px 10px 20px;
 	text-decoration: none;
