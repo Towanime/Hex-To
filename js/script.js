@@ -1,5 +1,4 @@
 "use strict";
-//window.Color = require("color")
 
 var delay = (function(){
   var timer = 0;
