@@ -1,5 +1,4 @@
-# Hex to
-===
+##Hex to
 
 Easily convert between color models.
 
