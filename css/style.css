@@ -20,12 +20,14 @@
 	top: 50%;
 	left: 50%;
 	margin: -175px -150px;
+	margin-bottom: 75px;
 	text-align: center;
 }
 
-@media only screen and (max-height: 300px), (max-height: 300px) and (orientation: landscape) {
+@media only screen and (max-height: 400px), (max-height: 400px) and (orientation: landscape) {
 	.container {
-		margin-top: 0px;
+		margin-top: 75px;
+		top: 0;
 	}
 }
 

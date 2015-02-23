@@ -180,7 +180,8 @@ var hexTo = (function ($) {
         }
     }
 
-    function getRandomColor() {
+    function getRandomColor(e) {
+        e.preventDefault();
         // taken from http://stackoverflow.com/questions/1484506/random-color-generator-in-javascript
         // might need something better
         var letters = '0123456789ABCDEF'.split('');
