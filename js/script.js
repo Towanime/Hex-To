@@ -172,8 +172,15 @@ var hexTo = (function ($) {
 
     function isLight(r, g, b){
         // taken from http://stackoverflow.com/questions/12043187/how-to-check-if-hex-color-is-too-black
-        var luma = 0.2126 * r + 0.7152 * g + 0.0722 * b; // per ITU-R BT.709
+        /*var luma = 0.2126 * r + 0.7152 * g + 0.0722 * b; // per ITU-R BT.709
         if (luma < 100) {
+            return false;
+        }else{
+            return true;
+        }*/
+        // Better results with this one - http://stackoverflow.com/questions/1754211/evaluate-whether-a-hex-value-is-dark-or-light
+        var luma = (r*0.299 + g*0.587 + b*0.114) / 256;
+        if (luma < 0.55) {
             return false;
         }else{
             return true;
