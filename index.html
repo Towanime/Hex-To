@@ -23,27 +23,45 @@
     <meta name="og:title" content="Hex to" />
     <meta name="keywords" content="hex, rgb, converter, color converter, hex to rgb, hex to hsl, hex to hwb, hex to rgb conversion, hexadecimal to rgb, hexadecimal to hsl, hexadecimal to hwb, hsl to hex, hwb to hex, hsl to rgb, random color, random color generator">
     <!-- build:css -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/tooltipster.css" />
+    <link rel="stylesheet" type="text/css" href="css/tooltipster-noir.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <!-- endbuild -->
     <!-- build:js -->
     <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
     <script type="text/javascript" src="js/color.js"></script>
+    <script type="text/javascript" src="js/jquery.tooltipster.min.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
     <!-- endbuild -->
 </head>
 <body style="background-color:#3d4d4d;" class="light">
-    <div>
+    <div style="float: left;">
         <p class="title">Hex to</p>
         <p style="padding: 0;margin: 0px 10px;font-size: small;">
             Simple color tools
         </p>
     </div>
     <div class="container">
-        <input id="hex" type="text" placeholder="Hex">
-        <input id="rgb" type="text" placeholder="RGB">
-        <input id="hsl" type="text" placeholder="HSL">
-        <input id="hwb" type="text" placeholder="HWB">
-        <input id="css" type="text" placeholder="CSS String" style="margin-bottom:30px;">
+        <div>
+            <input id="hex" type="text" placeholder="Hex">
+            <a href="#" class="tooltip" title="000, #000, 000000 or #000000">[ ? ]</a>
+        </div>
+        <div>
+            <input id="rgb" type="text" placeholder="RGB">
+            <a href="#" class="tooltip" title="rgb(255, 255, 255), rgba(255, 255, 255, 1) or 255, 145, 124">[ ? ]</a>
+        </div>
+        <div>
+            <input id="hsl" type="text" placeholder="HSL">
+            <a href="#" class="tooltip" title="hsl(0, 0%, 100%), hsla(0, 0%, 100%, 1) or 0, 85%, 50%">[ ? ]</a>
+        </div>
+        <div>
+            <input id="hwb" type="text" placeholder="HWB">
+            <a href="#" class="tooltip" title="hwb(0, 0%, 100%), hsla(0, 0%, 100%, 1) or 0, 85%, 50%">[ ? ]</a>
+        </div>
+        <div>
+            <input id="css" type="text" placeholder="CSS String" style="margin-bottom:40px;">
+            <a href="#" class="tooltip" title="red, blue, green, gray, orange, etc.">[ ? ]</a>
+        </div>
         <a id="btn-random" class="btn" href="#">Random</a>
     </div>
 </body>

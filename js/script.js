@@ -42,6 +42,15 @@ var hexTo = (function ($) {
 		});
         // random color
         $("#btn-random").click(getRandomColor);
+        var tooltips = $('.tooltip');
+        tooltips.click(function(e){
+            e.preventDefault();
+        })
+        tooltips.tooltipster({
+            theme: 'tooltipster-noir',
+            trigger: 'click',
+            position: 'left'
+        });
     }
 
     function convert(from){

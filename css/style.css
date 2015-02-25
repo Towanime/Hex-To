@@ -16,6 +16,7 @@
 .title {
 	padding-bottom: 0;
     margin-bottom: 0;
+    margin-top: 0;
     font-size: xx-large;
 }
 
@@ -100,5 +101,12 @@ input {
 	border: solid black 2px;
 }
 
-.light a:link, .light a:visited, .light a:hover, .light a:active { color: white; }
-.dark a:link, .dark a:visited, .dark a:hover, .dark a:active { color: black; }
+.light a:link, .light a:visited, .light a:hover, .light a:active { 
+	text-decoration: none;
+ 	color: white; 
+}
+
+.dark a:link, .dark a:visited, .dark a:hover, .dark a:active { 
+	text-decoration: none;
+	color: black;
+}
