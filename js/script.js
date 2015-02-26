@@ -11,7 +11,8 @@ var delay = (function(){
 // module definition
 var hexTo = (function ($) {
  	// input
-    var body, hexEl, rgbEl, hslEl, hwbEl, cssEl, fields, defaultColor;
+    var body, shadeContainer, shadeHideContainer, hexEl, rgbEl, hslEl, hwbEl,
+        cssEl, fields, defaultColor;
 
     // init variables and listeners
     function init() {
@@ -19,6 +20,8 @@ var hexTo = (function ($) {
     		hwbEl = $("#hwb"), cssEl = $("#css");
         defaultColor = new Color("#155474");//new Color("#3d4d4d");
         body = $("body");
+        shadeContainer = $("#shades-container");
+        shadeHideContainer = $(".shade-hide-container");
     	fields = $("input[type='text']");
     	fields.keyup(function(e) {
     		// ignore some keys
@@ -64,6 +67,18 @@ var hexTo = (function ($) {
             interactive: true,
             maxWidth: 490,
             content: $("<div class=\"about\">Hi there! My name is Viktor, I created this little utility to help me convert from Hexadecimal to RGB. Hope it's useful for you as well.<br><br>You can see more on <a href=\"https://github.com/Towanime/Hex-To\" target=\"_blank\" class=\"about-link\">Github</a> or if you want to chat, hit me <a href=\"https://twitter.com/towanime\" target=\"_blank\" class=\"about\">@towanime</a>.</div>")
+        });
+        // init shade button
+        $("#shade-show").click(function(e){
+            e.preventDefault();
+            var current = !rgbEl.val()?defaultColor.rgbString():rgbEl.val();
+            shades(new Color(current));
+            shadeHideContainer.show();
+        });
+        $("#shade-hide").click(function(e){
+            e.preventDefault();
+            shadeContainer.hide();
+            shadeHideContainer.hide();
         });
     }
 
@@ -224,10 +239,39 @@ var hexTo = (function ($) {
     }
 
     function shades(color){
-        for(var i = 0; i < fields.length; i++){
+        // save original
+        var rgb = color.rgbString();
+        var html = "";
+        var height = window.innerHeight / 10;
+        // create divs with different colors
+        for(var i = 0; i < 5; i++){
             color.darken(0.5);
-            $(fields[i]).attr("style", "background-color:"+color.rgbString())
+            html = getShadeDiv(color, height, "")+html;
         }
+        // add main color
+        color = new Color(rgb);
+        html += getShadeDiv(color, height, " - Main");
+        // now lighter
+        for(var i = 0; i < 5; i++){
+            color.lighten(0.5);
+            html += getShadeDiv(color, height, "");
+        }
+        shadeContainer.html(html);
+        shadeContainer.offset({top: window.innerHeight});
+        shadeContainer.show();
+        shadeContainer.animate({
+            top: 0
+        }, "fast");
+    }
+
+    function getShadeDiv(color, height, extra){
+        var textClass = "";
+        if(isLight(color.red(), color.green(), color.blue())){
+            textClass = "dark";
+        }else{
+            textClass = "light";
+        }
+        return "<div class=\"shade "+textClass+"\" style=\"background-color:"+color.rgbString()+";height:"+height+"px;\"><p>"+color.rgbString()+extra+"</p></div>"
     }
 
     return {
