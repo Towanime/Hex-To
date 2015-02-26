@@ -63,7 +63,7 @@ var hexTo = (function ($) {
             position: "bottom",
             interactive: true,
             maxWidth: 490,
-            content: $("<div class=\"about\">Hi there! My name is Viktor, I did this little utility to help convert from Hexadecimal to RGB. Hope it's useful for you as well.<br><br>You can see more on <a href=\"https://github.com/Towanime/Hex-To\" target=\"_blank\" class=\"about-link\">Github</a> or if you want to chat, hit me <a href=\"https://twitter.com/towanime\" target=\"_blank\" class=\"about\">@towanime</a>.</div>")
+            content: $("<div class=\"about\">Hi there! My name is Viktor, I created this little utility to help me convert from Hexadecimal to RGB. Hope it's useful for you as well.<br><br>You can see more on <a href=\"https://github.com/Towanime/Hex-To\" target=\"_blank\" class=\"about-link\">Github</a> or if you want to chat, hit me <a href=\"https://twitter.com/towanime\" target=\"_blank\" class=\"about\">@towanime</a>.</div>")
         });
     }
 
