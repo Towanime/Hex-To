@@ -31,7 +31,7 @@ var hexTo = (function ($) {
 		fields.blur(function(){
 			var from = $(this);
 			var type = from.attr("id");
-			if(from.val() == '' && type != "css"){
+			if(from.val() === "" && type != "css"){
 				clearFields();
 				return;
 			}
@@ -42,19 +42,33 @@ var hexTo = (function ($) {
 		});
         // random color
         $("#btn-random").click(getRandomColor);
-        var tooltips = $('.tooltip');
+        // format tooltips
+        var tooltips = $(".tooltip");
         tooltips.click(function(e){
             e.preventDefault();
-        })
+        });
         tooltips.tooltipster({
-            theme: 'tooltipster-noir',
-            trigger: 'click',
-            position: 'left'
+            theme: "tooltipster-noir",
+            trigger: "click",
+            position: "left"
+        });
+        // about tooltip
+        var about = $("#about");
+        about.click(function(e){
+            e.preventDefault();
+        });
+        about.tooltipster({
+            theme: "tooltipster-noir",
+            trigger: "click",
+            position: "bottom",
+            interactive: true,
+            maxWidth: 490,
+            content: $("<div class=\"about\">Hi there! My name is Viktor, I did this little utility to help convert from Hexadecimal to RGB. Hope it's useful for you as well.<br><br>You can see more on <a href=\"https://github.com/Towanime/Hex-To\" target=\"_blank\" class=\"about-link\">Github</a> or if you want to chat, hit me <a href=\"https://twitter.com/towanime\" target=\"_blank\" class=\"about\">@towanime</a>.</div>")
         });
     }
 
     function convert(from){
-    	var type = from.attr('id');
+    	var type = from.attr("id");
     	var value = validateValue(type, from.val());
     	if(value === false){
     		clearFields(type);
@@ -62,19 +76,19 @@ var hexTo = (function ($) {
     	}
     	try {
     		var color = new Color(value);
-    		if(type != 'hex'){
+    		if(type != "hex"){
     			hexEl.val(color.hexString());
     		}
-    		if(type != 'rgb'){
+    		if(type != "rgb"){
     			rgbEl.val(color.rgbString());
     		}
-    		if(type != 'hsl'){
+    		if(type != "hsl"){
     			hslEl.val(color.hslString());
     		}
-    		if(type != 'hwb'){
+    		if(type != "hwb"){
     			hwbEl.val(color.hwbString());
     		}
-    		if(type != 'css'){
+    		if(type != "css"){
     			cssEl.val(color.keyword());
     		}
             // update theme
@@ -104,8 +118,8 @@ var hexTo = (function ($) {
     			var rgbRE = /(rgb[a]?\(?)?(\d{1,3}),\s?(\d{1,3}),\s?(\d{1,3})(,?\s?([0-1]\.?[0-9]?))?\)?/i;
 				var match = rgbRE.exec(value);
                 //["rgba(255, 1, 55, 0.7)", "rgba(", "255", "1", "55", ", 0.7", "0.7", index: 0, input: "rgba(255, 1, 55, 0.7)"]
-				if(match && match.input.length == match[0].length
-					&& match[2] && match[3] && match[4]){
+				if(match && match.input.length == match[0].length && 
+                    match[2] && match[3] && match[4]){
 					var start = match[1]?match[1]:"rgb(", end = ")", r = match[2], g = match[3], b = match[4], a = 1;
 					// does it have alpha?
                      if(match[6] || start=="rgba("){

@@ -20,6 +20,11 @@
     font-size: xx-large;
 }
 
+#about {
+	margin-right: 8px;
+	font-size: x-large;
+}
+
 .container {
 	position: absolute;
 	width: 300px;
@@ -109,4 +114,9 @@ input {
 .dark a:link, .dark a:visited, .dark a:hover, .dark a:active { 
 	text-decoration: none;
 	color: black;
+}
+
+.about a:link, .about a:visited, .about a:hover, .about a:active { 
+	text-decoration: underline;
+ 	color: rgb(10, 108, 126); 
 }
