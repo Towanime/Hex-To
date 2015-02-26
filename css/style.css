@@ -1,8 +1,14 @@
-@import url(http://fonts.googleapis.com/css?family=Droid+Sans);
+/*@import url(http://fonts.googleapis.com/css?family=Droid+Sans);*/
+@import url(http://fonts.googleapis.com/css?family=Nunito);
 
 *{
-	font-family: 'Droid Sans', sans-serif;
+	/*font-family: 'Droid Sans', sans-serif;*/
+	font-family: 'Nunito', sans-serif;
 	font-weight: 400; 
+}
+
+body{
+	margin: 0;
 }
 
 .light {
@@ -11,6 +17,18 @@
 
 .dark {
 	color: black;
+}
+
+.hex-to {
+	position: absolute;
+	top: 20px;
+	left: 20px;
+}
+
+.about-title {
+	position: absolute;
+	right: 20px;
+	top: 28px;
 }
 
 .title {
@@ -36,9 +54,9 @@
 	text-align: center;
 }
 
-@media only screen and (max-height: 400px), (max-height: 400px) and (orientation: landscape) {
+@media only screen and (max-height: 450px), (max-height: 450px) and (orientation: landscape) {
 	.container {
-		margin-top: 75px;
+		margin-top: 95px;
 		top: 0;
 	}
 }

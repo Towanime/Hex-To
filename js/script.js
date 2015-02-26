@@ -17,7 +17,7 @@ var hexTo = (function ($) {
     function init() {
     	hexEl = $("#hex"), rgbEl = $("#rgb"), hslEl = $("#hsl"),
     		hwbEl = $("#hwb"), cssEl = $("#css");
-        defaultColor = new Color("#3d4d4d");
+        defaultColor = new Color("#155474");//new Color("#3d4d4d");
         body = $("body");
     	fields = $("input[type='text']");
     	fields.keyup(function(e) {
@@ -221,6 +221,13 @@ var hexTo = (function ($) {
         }
         hexEl.val(color);
         convert(hexEl);
+    }
+
+    function shades(color){
+        for(var i = 0; i < fields.length; i++){
+            color.darken(0.5);
+            $(fields[i]).attr("style", "background-color:"+color.rgbString())
+        }
     }
 
     return {
