@@ -2,7 +2,8 @@
   "name": "Hex-to",
   "version": "0.0.1",
   "devDependencies": {
-    "gulp": "^3.8.11"
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0"
   },
   "description": "Simple color conversion tools",
   "main": "gulpfile.js",

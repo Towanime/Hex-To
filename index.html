@@ -1,7 +1,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Hex to</title>
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <link rel="apple-touch-icon" href="icon-default.png">
@@ -17,57 +17,69 @@
     <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <meta name="description" content="Easily convert between Hex, RGB, HSL, HWB and CSS string color values.">
-    <meta name="og:description" content="Easily convert between Hex, RGB, HSL, HWB and CSS string color values." />
-    <meta name="og:type" content="website" />
-    <meta name="og:image" content="/apple-icon-152x152.png" />
-    <meta name="og:title" content="Hex to" />
-    <meta name="keywords" content="hex, rgb, converter, color converter, hex to rgb, hex to hsl, hex to hwb, hex to rgb conversion, hexadecimal to rgb, hexadecimal to hsl, hexadecimal to hwb, hsl to hex, hwb to hex, hsl to rgb, random color, random color generator">
+    <meta name="og:description" content="Easily convert between Hex, RGB, HSL, HWB and CSS string color values."/>
+    <meta name="og:type" content="website"/>
+    <meta name="og:image" content="/apple-icon-152x152.png"/>
+    <meta name="og:title" content="Hex to"/>
+    <meta name="keywords"
+          content="hex, rgb, converter, color converter, hex to rgb, hex to hsl, hex to hwb, hex to rgb conversion, hexadecimal to rgb, hexadecimal to hsl, hexadecimal to hwb, hsl to hex, hwb to hex, hsl to rgb, random color, random color generator">
     <!-- build:css -->
-    <link rel="stylesheet" type="text/css" href="css/tooltipster.css" />
-    <link rel="stylesheet" type="text/css" href="css/tooltipster-noir.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/tooltipster.css"/>
+    <link rel="stylesheet" type="text/css" href="css/tooltipster-noir.css"/>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <!-- endbuild -->
     <!-- build:js -->
     <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
     <script type="text/javascript" src="js/color.js"></script>
     <script type="text/javascript" src="js/jquery.tooltipster.min.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
     <!-- endbuild -->
 </head>
-<body style="background-color:#155474;" class="light">
-    <div id="shades-container">
-    </div>
-    <div class="hex-to">
-        <p class="title">Hex to</p>
-        <p style="padding: 0;margin: 0px 10px;font-size: small;">
-            Simple color tools
-        </p>
-    </div>
-    <div class="about-title">
-        <a id="about" href="#">About</a>
-    </div>
+<body>
+<div class="jumbotron vertical-center">
     <div class="container">
-        <div>
-            <input id="hex" type="text" placeholder="Hex">
-            <a href="#" class="tooltip" title="000, #000, 000000 or #000000">[ ? ]</a>
+        <div class="row">
+            <div class="hex-to">
+                <p class="title">Hex to</p>
+
+                <p style="padding: 0;margin: 0px 10px;font-size: small;">
+                    Simple color tools
+                </p>
+            </div>
+            <div class="about-title">
+                <a id="about" href="#">About</a>
+            </div>
+            <div class="col-md-4 col-md-offset-4">
+                <div class="centered-pills">
+                    <ul id="from-options" class="nav nav-pills">
+                        <li class="active" data-value="hex"><a href="#">HEX</a></li>
+                        <li class="disabled" data-value="rgb"><a href="#">RGB</a></li>
+                        <li data-value="hsl"><a href="#">HSL</a></li>
+                        <li data-value="hwb"><a href="#">HWB</a></li>
+                        <li data-value="css"><a href="#">CSS</a></li>
+                    </ul>
+                </div>
+                <div class="fields col-md-10 col-md-offset-1">
+                    <input type="text" class="form-control" id="from">
+                    <p>to</p>
+                    <input type="text" class="form-control" id="to">
+                </div>
+                <div class="centered-pills">
+                    <ul id="to-options" class="nav nav-pills">
+                        <li class="disabled" data-value="hex"><a href="#">HEX</a></li>
+                        <li class="active" data-value="rgb"><a href="#">RGB</a></li>
+                        <li data-value="hsl"><a href="#">HSL</a></li>
+                        <li data-value="hwb"><a href="#">HWB</a></li>
+                        <li data-value="css"><a href="#">CSS</a></li>
+                    </ul>
+                </div>
+                <a class="btn btn-default" href="#">Random</a>
+            </div>
         </div>
-        <div>
-            <input id="rgb" type="text" placeholder="RGB">
-            <a href="#" class="tooltip" title="rgb(255, 255, 255), rgba(255, 255, 255, 1) or 255, 145, 124">[ ? ]</a>
-        </div>
-        <div>
-            <input id="hsl" type="text" placeholder="HSL">
-            <a href="#" class="tooltip" title="hsl(0, 0%, 100%), hsla(0, 0%, 100%, 1) or 0, 85%, 50%">[ ? ]</a>
-        </div>
-        <div>
-            <input id="hwb" type="text" placeholder="HWB">
-            <a href="#" class="tooltip" title="hwb(0, 0%, 100%), hsla(0, 0%, 100%, 1) or 0, 85%, 50%">[ ? ]</a>
-        </div>
-        <div>
-            <input id="css" type="text" placeholder="CSS String" style="margin-bottom:40px;">
-            <a href="#" class="tooltip" title="red, blue, green, gray, orange, etc.">[ ? ]</a>
-        </div>
-        <a id="btn-random" class="btn" href="#">Random</a>
     </div>
+
+</div>
 </body>
 </html>

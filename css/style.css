@@ -1,173 +1,110 @@
 /*@import url(http://fonts.googleapis.com/css?family=Droid+Sans);*/
 @import url(http://fonts.googleapis.com/css?family=Nunito);
 
-*{
-	/*font-family: 'Droid Sans', sans-serif;*/
-	font-family: 'Nunito', sans-serif;
-	font-weight: 400; 
+* {
+    /*font-family: 'Droid Sans', sans-serif;*/
+    font-family: 'Nunito', sans-serif;
+    font-weight: 400;
 }
 
-body{
-	margin: 0;
+body {
+    margin: 0;
+    background-color: #F7F6F6;
+    color: #8C8888;
 }
 
-.light {
-	color: white;
+.jumbotron {
+    background: none;
 }
 
-.dark {
-	color: black;
+.centered-pills {
+    text-align: center
+}
+
+.centered-pills ul.nav-pills {
+    display: inline-block
+}
+
+.centered-pills li {
+    display: inline
+}
+
+.centered-pills a {
+    float: left
+}
+
+* html .centered-pills ul.nav-pills, * + html .centered-pills ul.nav-pills {
+    display: inline
+}
+
+.jumbotron p {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.fields {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .hex-to {
-	position: absolute;
-	top: 20px;
-	left: 20px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
 }
 
 .about-title {
-	position: absolute;
-	right: 20px;
-	top: 28px;
+    position: absolute;
+    right: 20px;
+    top: 28px;
 }
 
 .title {
-	padding-bottom: 0;
+    padding-bottom: 0;
     margin-bottom: 0;
     margin-top: 0;
     font-size: xx-large;
 }
 
 #about {
-	margin-right: 8px;
-	font-size: x-large;
+    margin-right: 8px;
+    font-size: x-large;
 }
 
-.container {
-	position: absolute;
-	width: 300px;
-	height: 300px;
-	top: 50%;
-	left: 50%;
-	margin: -150px -150px;
-	margin-bottom: 75px;
-	text-align: center;
+.vertical-center {
+    height: 100%;
+    width: 100%;
+
+    text-align: center; /* align the inline(-block) elements horizontally */
+    font: 0/0 a; /* remove the gap between inline(-block) elements */
 }
 
-@media only screen and (max-height: 450px), (max-height: 450px) and (orientation: landscape) {
-	.container {
-		margin-top: 95px;
-		top: 0;
-	}
+.vertical-center:before {
+    /* create a full-height inline block pseudo=element */
+    content: " ";
+    display: inline-block;
+    vertical-align: middle; /* vertical alignment of the inline element */
+    height: 100%;
 }
 
-.shade-title {
-	position: absolute;
-	right: 20px;
-	bottom: 20px;
+.vertical-center > .container {
+    max-width: 100%;
+
+    display: inline-block;
+    vertical-align: middle; /* vertical alignment of the inline element */
+    /* reset the font property */
+    font: 16px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-.shade-label {
-	font-size: x-large;
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover {
+    background-color: #F26662;
 }
 
-#shades-container {
-	position: relative;
-	width: 100%;
-	height: 100%;
-	z-index: 10;
-	display: none;
-	overflow-y: auto;
+.nav-pills > li > a {
+    color: #8C8888;
 }
 
-.shade {
-	padding: 10px;
-	max-height: 55px;
-}
-
-.shade p {
-	margin: 0;
-}
-
-.shade-hide-container {
-	z-index: 15;
-	background-color: #155474 !important;
-}
-
-input {
-	width: 250px;
-	margin: auto;
-	padding: 10px;
-	margin-bottom: 5px;
-	font-size: x-large;
-	border: 0;
-	border-bottom: 1px solid;
-	background: transparent;
-}
-
-.light input{
-	color: white;
-}
-
-.dark input{
-	color: black;
-}
-
-.light ::-webkit-input-placeholder { /* WebKit browsers */
-    color: white;
-}
-.light :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-   color: white;
-   opacity: 1;
-}
-.light ::-moz-placeholder { /* Mozilla Firefox 19+ */
-   color: white;
-   opacity: 1;
-}
-.light :-ms-input-placeholder { /* Internet Explorer 10+ */
-   color: white;
-}
-
-.dark ::-webkit-input-placeholder { /* WebKit browsers */
-    color: black;
-}
-.dark :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-   color: black;
-   opacity: 1;
-}
-.dark ::-moz-placeholder { /* Mozilla Firefox 19+ */
-   color: black;
-   opacity: 1;
-}
-.dark :-ms-input-placeholder { /* Internet Explorer 10+ */
-   color: black;
-}
-
-.btn {
-	background: none;
-	padding: 10px 20px 10px 20px;
-	text-decoration: none;
-}
-
-.light .btn {
-	border: solid white 2px;
-}
-
-.dark .btn {
-	border: solid black 2px;
-}
-
-.light a:link, .light a:visited, .light a:hover, .light a:active { 
-	text-decoration: none;
- 	color: white; 
-}
-
-.dark a:link, .dark a:visited, .dark a:hover, .dark a:active { 
-	text-decoration: none;
-	color: black;
-}
-
-.about a:link, .about a:visited, .about a:hover, .about a:active { 
-	text-decoration: underline;
- 	color: rgb(10, 108, 126); 
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+    color: #fff;
+    background-color: #F26662;
 }
