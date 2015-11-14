@@ -11,7 +11,7 @@ var delay = (function () {
 // module definition
 var hexTo = (function ($) {
     // input
-    var fromEl, toEl, fromOptions, toOptions, defaultColor;
+    var fromEl, toEl, fromOptions, toOptions, title, defaultColor;
 
     // init variables and listeners
     function init() {
@@ -20,7 +20,8 @@ var hexTo = (function ($) {
         // pills
         fromOptions = $('#from-options');
         toOptions = $('#to-options');
-        defaultColor = new Color("#155474");
+        title = $('#title');
+        defaultColor = "#8C8888";
 
         // register listeners for the fields
         fromEl.keyup(onKeyUp);
@@ -41,12 +42,13 @@ var hexTo = (function ($) {
             fromOptions.find('li').removeClass('active');
             pill.addClass('active');
             // set disable it's equal on the other pills
-            toOptions.find('li').removeClass('disabled');
-            toOptions.find('li[data-value="'+pill.attr('data-value')+'"]').addClass('disabled');
+            disableFormat(toOptions, pill.attr('data-value'));
 
-            // has a value in from? convert it using the current value in toEl
-            if (fromEl.val()) {
+            // in case you write something not valid, check if new format is valid with the value
+            if (toEl.val()) {
                 convert(toEl);
+            }else{
+                convert(fromEl);
             }
 
         });
@@ -63,12 +65,12 @@ var hexTo = (function ($) {
             toOptions.find('li').removeClass('active');
             pill.addClass('active');
             // set disable it's equal on the other pills
-            fromOptions.find('li').removeClass('disabled');
-            fromOptions.find('li[data-value="'+pill.attr('data-value')+'"]').addClass('disabled');
+            disableFormat(fromOptions, pill.attr('data-value'));
 
-            // has a value in from? convert it using the current value in toEl
-            if (toEl.val()) {
+            if (fromEl.val()) {
                 convert(fromEl);
+            }else{
+                convert(toEl)
             }
 
         });
@@ -110,24 +112,21 @@ var hexTo = (function ($) {
     }
 
     function onBlur() {
-        /* var from = $(this);
-         var type = from.attr("id");
-         if (from.val() === "" && type != "css") {
-         clearFields();
-         return;
-         }
-         var value = validateValue(type, from.val());
-         if (value !== false) {
-         from.val(value);
-         }*/
+        var from = $(this);
+        var format = getActiveOptionOn(from.attr('id'));
+
+        var value = validateValue(format, from.val());
+        if (value !== false) {
+            from.val(value);
+        }
     }
 
     function convert(fromField) {
         // get target field
         var toField = (fromField.attr('id') == fromEl.attr('id')) ? toEl : fromEl;
         // get formats
-        var fromFormat = $('#' + fromField.attr('id') + '-options').find('.active').attr('data-value');
-        var toFormat = $('#' + toField.attr('id') + '-options').find('.active').attr('data-value');
+        var fromFormat = getActiveOptionOn(fromField.attr('id'));
+        var toFormat = getActiveOptionOn(toField.attr('id'));
 
         // origin type to convert from
         var value = validateValue(fromFormat, fromField.val());
@@ -138,10 +137,27 @@ var hexTo = (function ($) {
         var toValue = getFormatValue(toFormat, value);
         if (toValue !== false) {
             toField.val(toValue);
+            // update title color
+            update(new Color(value));
+        }else{
+            clearFields(fromField);
         }
+    }
 
-        // update from field too
-        fromField.val(value);
+    /**
+     * Returns the format selected on the list by the name provided.
+     * Only two options, to and from.
+     *
+     * @param listName
+     * @returns {*}
+     */
+    function getActiveOptionOn(listName) {
+        return $('#' + listName + '-options').find('.active').attr('data-value');
+    }
+
+    function disableFormat(options, format){
+        options.find('li').removeClass('disabled');
+        options.find('li[data-value="' + format + '"]').addClass('disabled');
     }
 
     /**
@@ -256,15 +272,20 @@ var hexTo = (function ($) {
     function clearFields(ignore) {
         if (!ignore || fromEl.attr('id') != ignore.attr('id'))fromEl.val('');
         if (!ignore || toEl.attr('id') != ignore.attr('id'))toEl.val('');
+        update();
     }
 
     function update(color) {
-        body.attr("style", "background-color:" + color.hexString() + ";");
-        if (isLight(color.red(), color.green(), color.blue())) {
-            body.attr("class", "dark");
-        } else {
-            body.attr("class", "light");
+        // no color? restore to normal
+        if (!color) {
+            title.attr("style", "color:" + defaultColor + ";");
+            return;
         }
+        // new animation
+        title.removeClass().addClass('animated bounceIn').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+            $(this).removeClass();
+        });
+        title.attr("style", "color:" + color.hexString() + ";");
     }
 
     function isLight(r, g, b) {
@@ -293,44 +314,24 @@ var hexTo = (function ($) {
         for (var i = 0; i < 6; i++) {
             color += letters[Math.floor(Math.random() * 16)];
         }
-        hexEl.val(color);
-        convert(hexEl);
-    }
-
-    function shades(color) {
-        // save original
-        var rgb = color.rgbString();
-        var html = "";
-        var height = window.innerHeight / 10;
-        // create divs with different colors
-        for (var i = 0; i < 5; i++) {
-            color.darken(0.5);
-            html = getShadeDiv(color, height, "") + html;
+        // get format from and convert, if not possible then set to hex and convert
+        var format = getActiveOptionOn('from');
+        if (format == 'css') {
+            // set it to hex
+            fromOptions.find('li').removeClass('active');
+            fromOptions.find('li[data-value="hex"]').addClass('active');
+            disableFormat(toOptions, 'hex');
+            // if by change the other options are hex then set to rgb
+            if (getActiveOptionOn('from') == 'hex') {
+                toOptions.find('li').removeClass('active');
+                toOptions.find('li[data-value="rgb"]').addClass('active');
+                disableFormat(fromOptions, 'rgb');
+            }
         }
-        // add main color
-        color = new Color(rgb);
-        html += getShadeDiv(color, height, " - Main");
-        // now lighter
-        for (var i = 0; i < 5; i++) {
-            color.lighten(0.5);
-            html += getShadeDiv(color, height, "");
-        }
-        shadeContainer.html(html);
-        shadeContainer.offset({top: window.innerHeight});
-        shadeContainer.show();
-        shadeContainer.animate({
-            top: 0
-        }, "fast");
-    }
-
-    function getShadeDiv(color, height, extra) {
-        var textClass = "";
-        if (isLight(color.red(), color.green(), color.blue())) {
-            textClass = "dark";
-        } else {
-            textClass = "light";
-        }
-        return "<div class=\"shade " + textClass + "\" style=\"background-color:" + color.rgbString() + ";height:" + height + "px;\"><p>" + color.rgbString() + extra + "</p></div>"
+        // set the text
+        fromEl.val(color);
+        // convert it and show
+        convert(fromEl);
     }
 
     return {
