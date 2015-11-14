@@ -77,29 +77,7 @@ var hexTo = (function ($) {
 
         // random color
         $("#btn-random").click(getRandomColor);
-        // format tooltips
-        var tooltips = $(".tooltip");
-        tooltips.click(function (e) {
-            e.preventDefault();
-        });
-        tooltips.tooltipster({
-            theme: "tooltipster-noir",
-            trigger: "click",
-            position: "left"
-        });
-        // about tooltip
-        var about = $("#about");
-        about.click(function (e) {
-            e.preventDefault();
-        });
-        about.tooltipster({
-            theme: "tooltipster-noir",
-            trigger: "click",
-            position: "bottom",
-            interactive: true,
-            maxWidth: 490,
-            content: $("<div class=\"about\">Hi there! My name is Viktor, I created this little utility to help me convert from Hexadecimal to RGB. Hope it's useful for you as well.<br><br>You can see more on <a href=\"https://github.com/Towanime/Hex-To\" target=\"_blank\" class=\"about-link\">Github</a> or if you want to chat, hit me <a href=\"https://twitter.com/towanime\" target=\"_blank\" class=\"about\">@towanime</a>.</div>")
-        });
+
     }
 
     function onKeyUp(e) {

@@ -26,7 +26,7 @@ gulp.task('htmlpage', function() {
 
 // JS concat, strip debugging and minify
 gulp.task('scripts', function() {
-  gulp.src(['./js/*.js'])
+  gulp.src(['./jquery-1.11.2.min.js','./js/*.js'])
     .pipe(concat('script.min.js'))
     .pipe(stripDebug())
     .pipe(uglify())
