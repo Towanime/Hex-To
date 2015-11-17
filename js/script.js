@@ -292,20 +292,17 @@ var hexTo = (function ($) {
         for (var i = 0; i < 6; i++) {
             color += letters[Math.floor(Math.random() * 16)];
         }
-        // get format from and convert, if not possible then set to hex and convert
-        var format = getActiveOptionOn('from');
-        if (format == 'css') {
-            // set it to hex
-            fromOptions.find('li').removeClass('active');
-            fromOptions.find('li[data-value="hex"]').addClass('active');
-            disableFormat(toOptions, 'hex');
-            // if by change the other options are hex then set to rgb
-            if (getActiveOptionOn('from') == 'hex') {
-                toOptions.find('li').removeClass('active');
-                toOptions.find('li[data-value="rgb"]').addClass('active');
-                disableFormat(fromOptions, 'rgb');
-            }
+        // set it to hex
+        fromOptions.find('li').removeClass('active');
+        fromOptions.find('li[data-value="hex"]').addClass('active');
+        disableFormat(toOptions, 'hex');
+        // if by change the other options are hex then set to rgb
+        if (getActiveOptionOn('from') == 'hex') {
+            toOptions.find('li').removeClass('active');
+            toOptions.find('li[data-value="rgb"]').addClass('active');
+            disableFormat(fromOptions, 'rgb');
         }
+
         // set the text
         fromEl.val(color);
         // convert it and show
