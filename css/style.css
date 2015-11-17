@@ -51,6 +51,13 @@ a {
     margin-bottom: 10px;
 }
 
+@media (min-width: 992px) and (max-width: 1199px) {
+    .wrapper{
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
 .about-title {
     position: absolute;
     right: 20px;
