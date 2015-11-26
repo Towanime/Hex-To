@@ -11,12 +11,14 @@ var delay = (function () {
 // module definition
 var hexTo = (function ($) {
     // input
-    var fromEl, toEl, fromOptions, toOptions, title, defaultColor;
+    var fromEl, toEl, fromOptions, toOptions, title, defaultColor, helpFrom, helpTo;
 
     // init variables and listeners
     function init() {
         fromEl = $('#from');
         toEl = $('#to');
+        helpFrom = $('#help-from');
+        helpTo = $('#help-to');
         // pills
         fromOptions = $('#from-options');
         toOptions = $('#to-options');
@@ -78,6 +80,9 @@ var hexTo = (function ($) {
         // random color
         $("#btn-random").click(getRandomColor);
 
+        // help
+        helpFrom.click(help);
+        helpTo.click(help)
     }
 
     function onKeyUp(e) {
@@ -266,23 +271,6 @@ var hexTo = (function ($) {
         title.attr("style", "color:" + color.hexString() + ";");
     }
 
-    function isLight(r, g, b) {
-        // taken from http://stackoverflow.com/questions/12043187/how-to-check-if-hex-color-is-too-black
-        /*var luma = 0.2126 * r + 0.7152 * g + 0.0722 * b; // per ITU-R BT.709
-         if (luma < 100) {
-         return false;
-         }else{
-         return true;
-         }*/
-        // Better results with this one - http://stackoverflow.com/questions/1754211/evaluate-whether-a-hex-value-is-dark-or-light
-        var luma = (r * 0.299 + g * 0.587 + b * 0.114) / 256;
-        if (luma < 0.55) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
     function getRandomColor(e) {
         e.preventDefault();
         // taken from http://stackoverflow.com/questions/1484506/random-color-generator-in-javascript
@@ -307,6 +295,35 @@ var hexTo = (function ($) {
         fromEl.val(color);
         // convert it and show
         convert(fromEl);
+    }
+
+    // show notify div with the valid formats
+    function help(){
+        var fieldId = $(this).prev('input').attr('id');
+        var format = getActiveOptionOn(fieldId);
+        $('#title').notify(helpFor(format), {elementPosition: 'top center'});
+        //$('#'+fieldId).notify(helpFor(format), {elementPosition: $(this).attr('data-position')});
+    }
+
+    // gets an example string depending on the format
+    function helpFor(format){
+        switch (format){
+
+            case 'hex':
+                return '000, #000, 000000 <br> or #000000';
+
+            case 'rgb':
+                return 'rgb(255, 255, 255), rgba(255, 255, 255, 1) <br> or 255, 145, 124';
+
+            case 'hsl':
+                return 'hsl(0, 0%, 100%), hsla(0, 0%, 100%, 1) <br> or 0, 85%, 50%';
+
+            case 'hwb':
+                return 'hwb(0, 0%, 100%) or 0, 85%, 50%';
+
+            case 'css':
+                return 'yellow, blue, red';
+        }
     }
 
     return {

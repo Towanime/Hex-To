@@ -12,7 +12,7 @@
     <link rel="apple-touch-icon" sizes="144x144" href="./apple-icon-144x144.png">
     <link rel="apple-touch-icon" sizes="152x152" href="./apple-icon-152x152.png">
     <link rel="apple-touch-icon" sizes="180x180" href="./apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="./android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="./android-icon-192x192.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="./favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
@@ -27,30 +27,19 @@
     <meta name="og:title" content="Hex to"/>
     <meta name="keywords"
           content="hex, rgb, converter, color converter, hex to rgb, hex to hsl, hex to hwb, hex to rgb conversion, hexadecimal to rgb, hexadecimal to hsl, hexadecimal to hwb, hsl to hex, hwb to hex, hsl to rgb, random color, random color generator">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-    <!-- build:css -->
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="css/animate.css">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <!-- endbuild -->
-    <!-- build:js -->
-    <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
-    <script type="text/javascript" src="js/color.js"></script>
-    <script type="text/javascript" src="js/script.js"></script>
-    <!-- endbuild -->
 </head>
 <body>
 <div class="jumbotron vertical-center">
     <div class="container">
         <div class="row">
             <div class="hex-to">
-                <h1 id="title" style="margin-top: 0;">Hex to</h1>
+                <h1 id="title">Hex to</h1>
 
                 <p style="margin: 10px;font-size: small;">
                     Simple color tools
                 </p>
             </div>
-            <div class="about-title">
+            <div class="about-title" style="font-size: small;">
                 <a href="https://github.com/Towanime/Hex-To" target="_blank">View on GitHub</a>
             </div>
             <div class="wrapper col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
@@ -64,9 +53,21 @@
                     </ul>
                 </div>
                 <div class="fields col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1">
-                    <input type="text" class="form-control" id="from">
-                    <p>to</p>
-                    <input type="text" class="form-control" id="to">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="from">
+                        <span id="help-from" class="input-group-addon" data-position="top center">
+                            <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                        </span>
+                    </div>
+
+                    <p style="font-size: medium;">to</p>
+
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="to">
+                        <span id="help-to" class="input-group-addon" data-position="bottom center">
+                            <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                        </span>
+                    </div>
                 </div>
                 <div class="centered-pills">
                     <ul id="to-options" class="nav nav-pills">
@@ -77,11 +78,23 @@
                         <li data-value="css"><a href="#">CSS</a></li>
                     </ul>
                 </div>
-                <a id="btn-random" class="btn btn-default" href="#" style="margin-top:15px;">Random</a>
+                <a id="btn-random" class="btn btn-default" href="#" style="margin-top:15px;margin-bottom:15px;">Random</a>
             </div>
         </div>
     </div>
 
 </div>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<!-- build:css -->
+<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="css/animate.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<!-- endbuild -->
+<!-- build:js -->
+<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="js/color.js"></script>
+<script type="text/javascript" src="js/notify.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
+<!-- endbuild -->
 </body>
 </html>

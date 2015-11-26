@@ -58,6 +58,15 @@ a {
     }
 }
 
+.hex-to h1{
+    margin-top: 0;
+}
+
+.input-group-addon {
+    color: white;
+    background-color: #F26662;
+}
+
 .about-title {
     position: absolute;
     right: 20px;
