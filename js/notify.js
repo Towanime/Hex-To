@@ -559,7 +559,7 @@
 
 	//always include the default bootstrap style
 	addStyle("bootstrap", {
-		html: "<div>\n<span data-notify-html></span>\n</div>",
+		html: "<div style='text-align: right;'>\n<span data-notify-html></span>\n</div>",
 		classes: {
 			base: {
 				"font-weight": "bold",

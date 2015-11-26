@@ -301,8 +301,7 @@ var hexTo = (function ($) {
     function help(){
         var fieldId = $(this).prev('input').attr('id');
         var format = getActiveOptionOn(fieldId);
-        $('#title').notify(helpFor(format), {elementPosition: 'top center'});
-        //$('#'+fieldId).notify(helpFor(format), {elementPosition: $(this).attr('data-position')});
+        $.notify(helpFor(format));
     }
 
     // gets an example string depending on the format
@@ -310,13 +309,13 @@ var hexTo = (function ($) {
         switch (format){
 
             case 'hex':
-                return '000, #000, 000000 <br> or #000000';
+                return '000, #000, 000000<br> or #000000';
 
             case 'rgb':
-                return 'rgb(255, 255, 255), rgba(255, 255, 255, 1) <br> or 255, 145, 124';
+                return 'rgb(255, 255, 255), rgba(255, 255, 255, 1)<br> or 255, 145, 124';
 
             case 'hsl':
-                return 'hsl(0, 0%, 100%), hsla(0, 0%, 100%, 1) <br> or 0, 85%, 50%';
+                return 'hsl(0, 0%, 100%), hsla(0, 0%, 100%, 1)<br> or 0, 85%, 50%';
 
             case 'hwb':
                 return 'hwb(0, 0%, 100%) or 0, 85%, 50%';

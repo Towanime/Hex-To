@@ -58,6 +58,12 @@ a {
     }
 }
 
+@media (min-width: 350px) and (max-width: 768px) {
+    .input-group {
+        width: 275px;
+    }
+}
+
 .hex-to h1{
     margin-top: 0;
 }
